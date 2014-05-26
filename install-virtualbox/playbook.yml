@@ -1,0 +1,10 @@
+---
+- hosts: nbehera
+  remote_user: root
+
+  tasks:
+    - name: update sources
+      apt: update_cache=yes
+    
+    - name: install virtualbox
+      apt: name=virtualbox state=present
