@@ -28,5 +28,5 @@ ansible -i hosts all -a “/bin/echo kaixo”
 
 Playbook:
 ```
-ansible-playbook -i playbook.yml --private-key=my_id_rsa
+ansible-playbook --private-key=my_id_rsa -i hosts playbook.yml
 ```
