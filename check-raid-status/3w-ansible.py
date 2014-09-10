@@ -4,31 +4,22 @@ import ansible.runner
 import sys
 
 def copyScript(i, surl, sdest):
-	#i = ansible.inventory.Inventory(hosts)
 	results = ansible.runner.Runner(
 		inventory = i,
 		pattern = '*', forks = 10,
 		remote_user = 'root',
 		module_name = 'get_url', module_args = 'url=' + surl + ' dest=' + sdest + ' force=yes validate_certs=no',
-		#module_name = 'copy', module_args = 'src=' + script + ' dest=/tmp mode=0700',
-		#module_name='command', module_args='/usr/bin/uptime',
 	).run()
 	return results
 
 def execScript(i, script):
-	#i = ansible.inventory.Inventory(hosts)
 	results = ansible.runner.Runner(
 		inventory = i,
 		pattern = '*', forks = 10,
 		remote_user = 'root',
 		module_name = 'command', module_args = 'python ' + script,
-		#module_name='command', module_args='/usr/bin/uptime',
 	).run()
 	return results
-
-def purgeInventory(i, hosts):
-		#i = ansible.inventory.Inventory(hosts)
-		return i.restrict_to(hosts)
 
 def getErrors(results):
 	errors = ''
@@ -82,6 +73,4 @@ if __name__ == '__main__':
 			print "%s: %s" % (hostname, result['stdout'])
 	errors += getErrors(results)
 
-	#print cperrors
-	#print execerrors
 	print errors
