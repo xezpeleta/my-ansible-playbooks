@@ -1,0 +1,8 @@
+# file: playbook-install-firefox.yml
+---
+- name: test chocolatey with ansible
+  hosts: all
+  tasks:
+    - name: Install Firefox
+      win_chocolatey:
+        name: firefox
