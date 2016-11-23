@@ -117,4 +117,10 @@ $ ansible-playbook windows -i hosts playbook-install-firefox.yml
         state: present
 ```
 
+Speak messages and play sounds using [win_say module](http://docs.ansible.com/ansible/win_say_module.html):
+
+```sh
+ansible windows -i hosts -m win_say -a "msg='Hi! This is a demo' start_sound_path='C:\\windows\\media\\ding.wav' speech_speed=2"
+```
+
 More examples? [Check available Windows modules](http://docs.ansible.com/ansible/list_of_windows_modules.html)
