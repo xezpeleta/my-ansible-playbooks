@@ -8,35 +8,16 @@ to follow to set it up.
 
 ## Windows machines preparation
 
-First of all, you need to prepare Windows machines to enable PowerShell
-remoting.
-
-### Enable PowerShell script execution
-
 In order for Ansible to manage your windows machines, you will have to enable
-and configure PowerShell remoting.
+and configure PowerShell remoting. Fortunately, there is a quick way to do that.
 
-To automate the setup of WinRM, you can run [this PowerShell script](https://github.com/ansible/ansible/raw/devel/examples/scripts/ConfigureRemotingForAnsible.ps1)
-on the remote machine.
+In your Windows machine, open a command prompt as Administrator:
 
-#### In your Windows machine
+```bat
+@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://github.com/ansible/ansible/raw/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))"
+```
 
-In Windows 10, by default, PowerShell can be used only in interactive mode;
-no scripts can be run. That's why you have to allow script execution:
-
-1. Download [the script](https://github.com/ansible/ansible/raw/devel/examples/scripts/ConfigureRemotingForAnsible.ps1)
-2. Open command prompt (as Administrator)
-3. Allow PS script executions: `powershell "Set-ExecutionPolicy -ExecutionPolicy Unrestricted"`
-4. Run downloaded script: `powershell "C:\your-path\ConfigureRemoteForAnsible.ps1"`
-5. Restore script execution policy: `powershell "Set-ExecutionPolicy -ExecutionPolicy Restricted"`
-
-### Firewall policy
-
-The script above will add a rule in your Windows firewall to allow WinRM
-connections.
-
-
-**_Note_**: *Kaspersky Endpoint Security 10 uses its own firewall. You need to
+**_Note_**: *Kaspersky Endpoint Security 10 uses its own firewall. You might
 change the configuration there manually to allow WinRM incoming connections
 (TCP/5986). For testing purposes, you can just disable Kaspersky firewall*
 
